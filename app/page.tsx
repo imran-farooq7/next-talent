@@ -1,4 +1,5 @@
 import AddTalent from "./components/AddTalent";
+import Talents from "./components/Talents";
 
 export default function Home() {
 	return (
@@ -8,6 +9,7 @@ export default function Home() {
 			</h1>
 			<p>Hire Top 1% Talent</p>
 			<AddTalent />
+			<Talents />
 		</main>
 	);
 }
