@@ -30,3 +30,7 @@ export const createTalent = async (prevState: any, formData: FormData) => {
 		};
 	}
 };
+export const getAllTalents = async () => {
+	const data = await prisma.talent.findMany();
+	return data;
+};
