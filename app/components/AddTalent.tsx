@@ -1,8 +1,20 @@
+"use client";
+import { useFormState, useFormStatus } from "react-dom";
+import { createTalent } from "../actions/action";
+import Button from "./Button";
+
 export default function AddTalent() {
+	const initialState = {
+		name: "",
+		email: "",
+		title: "",
+		skills: "",
+	};
+	const [state, formAction] = useFormState(createTalent, initialState);
 	return (
 		<div className="flex w-full min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 			<div className="mt-5 sm:mx-auto sm:w-full sm:max-w-lg">
-				<form className="space-y-6" action="#">
+				<form className="space-y-6" action={formAction}>
 					<div>
 						<label
 							htmlFor="name"
@@ -72,13 +84,11 @@ export default function AddTalent() {
 					</div>
 
 					<div>
-						<button
-							type="submit"
-							className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-						>
-							Add talent
-						</button>
+						<Button />
 					</div>
+					{state.status === "success" && (
+						<p className="text-emerald-400">{state.message}</p>
+					)}
 				</form>
 			</div>
 		</div>
