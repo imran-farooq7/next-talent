@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/prisma/db";
+import { revalidatePath } from "next/cache";
 
 export const createTalent = async (prevState: any, formData: FormData) => {
 	const data = {
@@ -16,6 +17,7 @@ export const createTalent = async (prevState: any, formData: FormData) => {
 			},
 		});
 		if (createdTalent) {
+			revalidatePath("/");
 			return {
 				...prevState,
 				status: "success",
@@ -33,4 +35,23 @@ export const createTalent = async (prevState: any, formData: FormData) => {
 export const getAllTalents = async () => {
 	const data = await prisma.talent.findMany();
 	return data;
+};
+export const deleteTalent = async (id: string) => {
+	const delTalent = await prisma.talent.delete({
+		where: {
+			id,
+		},
+	});
+	if (delTalent) {
+		revalidatePath("/");
+		return {
+			status: "success",
+			message: "talent deleted successfully",
+		};
+	} else {
+		return {
+			status: "error",
+			message: "talent deletion failed",
+		};
+	}
 };

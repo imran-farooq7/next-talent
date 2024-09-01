@@ -86,9 +86,6 @@ export default function AddTalent() {
 					<div>
 						<Button />
 					</div>
-					{state.status === "success" && (
-						<p className="text-emerald-400">{state.message}</p>
-					)}
 				</form>
 			</div>
 		</div>
